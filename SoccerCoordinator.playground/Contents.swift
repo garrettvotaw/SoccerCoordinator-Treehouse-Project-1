@@ -127,7 +127,7 @@ var teams = [dragons, sharks, raptors]
 /***************************
  MARK: Team Assignment Logic
  ***************************/
-func splitPlayers() {
+func splitPlayersBasedOnExperience() {
     for player in players {
         if player["Experience"] == "Yes" {
             experiencedPlayers.append(player)
@@ -164,6 +164,20 @@ func makeTeams() {
  MARK: Letter Creation
  *********************/
 
+func createLetters (for team: [Player], teamName: String, practiceDetails: String) -> [String] {
+    var letters: [String] = []
+    for player in team {
+        switch teamName {
+        case "Dragons": letters.append("Dear \(String(describing: player["Guardians"])) I'm happy to announce that \(String(describing: player["Name"])) will be playing for the Dragons! Practice starts on \(practiceDetails)")
+        case "Sharks": letters.append("Dear \(String(describing: player["Guardians"])) I'm happy to announce that \(String(describing: player["Name"])) will be playing for the Sharks! Practice starts on \(practiceDetails)")
+        case "Raptors": letters.append("Dear \(String(describing: player["Guardians"])) I'm happy to announce that \(String(describing: player["Name"])) will be playing for the Raptors! Practice starts on \(practiceDetails)")
+        default : return ["No team found"]
+        }
+    }
+    return letters
+}
+
+let letters = createLetters(for: dragons, teamName: "Dragons", practiceDetails: "March 7th at 1pm")
 
 
 
@@ -177,14 +191,10 @@ func makeTeams() {
 
 
 
+//"Dear \(String(describing: player["Guardians"])) I'm happy to announce that \(String(describing: player["Name"])) will be playing for the []! Practice starts on March 7th at 1pm"
 
 
 
-
-
-
-
-
-splitPlayers()
+splitPlayersBasedOnExperience()
 makeTeams()
 
