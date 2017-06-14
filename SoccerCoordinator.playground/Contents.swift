@@ -99,22 +99,70 @@ let player18: [String:String] = ["Name":"Herschel Krustofski",
 
 
 
-
-// MARK: Player Arrays //
+/**********************
+  MARK: Player Arrays
+ **********************/
 typealias Player = [String:String]
 
 
-var playersArray = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, player13, player14, player15, player16, player17, player18]
+var players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, player13, player14, player15, player16, player17, player18]
 
-var dragons: [Player]
-var sharks: [Player]
-var raptors: [Player]
+var experiencedPlayers: [Player] = []
+var inexperiencedPlayers: [Player] = []
 
-for player in playersArray {
-    
+
+
+/**********************
+   MARK: Team Arrays
+ **********************/
+var dragons: [Player] = []
+var sharks: [Player] = []
+var raptors: [Player] = []
+
+var teams = [dragons, sharks, raptors]
+
+
+
+
+/***************************
+ MARK: Team Assignment Logic
+ ***************************/
+func splitPlayers() {
+    for player in players {
+        if player["Experience"] == "Yes" {
+            experiencedPlayers.append(player)
+        } else if player["Experience"] == "No"{
+            inexperiencedPlayers.append(player)
+        }
+    }
+}
+
+func makeTeams() {
+    for player in experiencedPlayers {
+        if dragons.count < experiencedPlayers.count/teams.count {
+            dragons.append(player)
+        } else if sharks.count < experiencedPlayers.count/teams.count {
+            sharks.append(player)
+        } else if raptors.count < experiencedPlayers.count/teams.count {
+            raptors.append(player)
+        }
+    }
+
+    for player in inexperiencedPlayers {
+        if dragons.count < players.count/teams.count {
+            dragons.append(player)
+        } else if sharks.count < players.count/teams.count {
+            sharks.append(player)
+        } else if raptors.count < players.count/teams.count {
+            raptors.append(player)
+        }
+    }
 }
 
 
+/*********************
+ MARK: Letter Creation
+ *********************/
 
 
 
@@ -122,4 +170,21 @@ for player in playersArray {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+splitPlayers()
+makeTeams()
 
