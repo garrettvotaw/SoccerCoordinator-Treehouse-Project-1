@@ -182,7 +182,7 @@ func createLetters (for team: [Player], teamName: String, practiceDetails: Strin
     return letters
 }
 
-var dragonLetters = createLetters(for: teamDragons, teamName: "Dragons", practiceDetails: "March 7th at 1pm")
+var dragonLetters = createLetters(for: teamDragons, teamName: "Dragons", practiceDetails: "March 17th at 1pm")
 var raptorLetters = createLetters(for: teamRaptors, teamName: "Raptors", practiceDetails: "March 18th at 1pm")
 var sharkLetters = createLetters(for: teamSharks, teamName: "Sharks", practiceDetails: "March 17th at 3pm")
 
@@ -204,14 +204,17 @@ printLetters()
  MARK: Extra Credit
  *********************/
 
+func calcAverageHeight (for team: [Player]) -> Int{
+    var totalHeight = 0
+    for player in team {
+        totalHeight += (Int(player["Height"]!)!)
+    }
+    return totalHeight/team.count
+}
 
-
-
-
-
-
-
-
+print ("Dragons average player height: \(calcAverageHeight(for: teamDragons)) inches")
+print ("Sharks average player height: \(calcAverageHeight(for: teamSharks)) inches")
+print ("Raptors average player height: \(calcAverageHeight(for: teamRaptors)) inches")
 
 
 
