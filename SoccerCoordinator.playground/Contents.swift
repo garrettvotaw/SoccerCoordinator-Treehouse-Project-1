@@ -115,11 +115,11 @@ var inexperiencedPlayers: [Player] = []
 /**********************
    MARK: Team Arrays
  **********************/
-var dragons: [Player] = []
-var sharks: [Player] = []
-var raptors: [Player] = []
+var teamDragons: [Player] = []
+var teamSharks: [Player] = []
+var teamRaptors: [Player] = []
 
-var teams = [dragons, sharks, raptors]
+var teams = [teamDragons, teamSharks, teamRaptors]
 
 
 
@@ -139,25 +139,30 @@ func splitPlayersBasedOnExperience() {
 
 func makeTeams() {
     for player in experiencedPlayers {
-        if dragons.count < experiencedPlayers.count/teams.count {
-            dragons.append(player)
-        } else if sharks.count < experiencedPlayers.count/teams.count {
-            sharks.append(player)
-        } else if raptors.count < experiencedPlayers.count/teams.count {
-            raptors.append(player)
+        if teamDragons.count < experiencedPlayers.count/teams.count {
+            teamDragons.append(player)
+        } else if teamSharks.count < experiencedPlayers.count/teams.count {
+            teamSharks.append(player)
+        } else if teamRaptors.count < experiencedPlayers.count/teams.count {
+            teamRaptors.append(player)
         }
     }
 
     for player in inexperiencedPlayers {
-        if dragons.count < players.count/teams.count {
-            dragons.append(player)
-        } else if sharks.count < players.count/teams.count {
-            sharks.append(player)
-        } else if raptors.count < players.count/teams.count {
-            raptors.append(player)
+        if teamDragons.count < players.count/teams.count {
+            teamDragons.append(player)
+        } else if teamSharks.count < players.count/teams.count {
+            teamSharks.append(player)
+        } else if teamRaptors.count < players.count/teams.count {
+            teamRaptors.append(player)
         }
     }
 }
+
+splitPlayersBasedOnExperience()
+makeTeams()
+
+
 
 
 /*********************
@@ -168,16 +173,36 @@ func createLetters (for team: [Player], teamName: String, practiceDetails: Strin
     var letters: [String] = []
     for player in team {
         switch teamName {
-        case "Dragons": letters.append("Dear \(String(describing: player["Guardians"])) I'm happy to announce that \(String(describing: player["Name"])) will be playing for the Dragons! Practice starts on \(practiceDetails)")
-        case "Sharks": letters.append("Dear \(String(describing: player["Guardians"])) I'm happy to announce that \(String(describing: player["Name"])) will be playing for the Sharks! Practice starts on \(practiceDetails)")
-        case "Raptors": letters.append("Dear \(String(describing: player["Guardians"])) I'm happy to announce that \(String(describing: player["Name"])) will be playing for the Raptors! Practice starts on \(practiceDetails)")
+        case "Dragons": letters.append("Dear \(String(describing: player["Guardians"]!)),\n I'm happy to announce that \(String(describing: player["Name"]!)) will be playing for the Dragons! We look forward to seeing them at practice on \(practiceDetails)\n" )
+        case "Sharks": letters.append("Dear \(String(describing: player["Guardians"]!)),\n I'm happy to announce that \(String(describing: player["Name"]!)) will be playing for the teamSharks! We look forward to seeing them at practice on \(practiceDetails)\n")
+        case "Raptors": letters.append("Dear \(String(describing: player["Guardians"]!)),\n I'm happy to announce that \(String(describing: player["Name"]!)) will be playing for the teamRaptors! We look forward to seeing them at practice on \(practiceDetails)\n")
         default : return ["No team found"]
         }
     }
     return letters
 }
 
-let letters = createLetters(for: dragons, teamName: "Dragons", practiceDetails: "March 7th at 1pm")
+var dragonLetters = createLetters(for: teamDragons, teamName: "Dragons", practiceDetails: "March 7th at 1pm")
+var raptorLetters = createLetters(for: teamRaptors, teamName: "Raptors", practiceDetails: "March 18th at 1pm")
+var sharkLetters = createLetters(for: teamSharks, teamName: "Sharks", practiceDetails: "March 17th at 3pm")
+
+
+var letters = dragonLetters + raptorLetters + sharkLetters
+
+func printLetters() {
+    for letter in letters {
+        print(letter)
+    }
+}
+
+printLetters()
+
+
+
+
+/*********************
+ MARK: Extra Credit
+ *********************/
 
 
 
@@ -189,12 +214,4 @@ let letters = createLetters(for: dragons, teamName: "Dragons", practiceDetails: 
 
 
 
-
-
-//"Dear \(String(describing: player["Guardians"])) I'm happy to announce that \(String(describing: player["Name"])) will be playing for the []! Practice starts on March 7th at 1pm"
-
-
-
-splitPlayersBasedOnExperience()
-makeTeams()
 
